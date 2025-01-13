@@ -1,0 +1,2895 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:SchemaLocation="CMSIS-SVD.xsd" >
+  <vendor>Mindgrove Technologies Private Limited</vendor>
+  <vendorID>MG</vendorID>
+  <name>Secure_IoT</name>
+  <series>Mindgrove Silicon</series>
+  <version>1.0.0</version>
+  <description>Mindgrove Silicon's Secure-IoT, based on IITM's Shakti Processor</description>
+
+  <!-- CPU core -->
+  <cpu>
+    <name>VAJRA</name>
+    <revision>r1p9</revision>
+    <endian>little</endian>
+    <mpuPresent>true</mpuPresent>
+    <fpuPresent>true</fpuPresent>
+    <fpuDP>true</fpuDP>
+    <dspPresent>false</dspPresent>
+    <icachePresent>true</icachePresent>
+    <dcachePresent>true</dcachePresent>
+    <nvicPrioBits>7</nvicPrioBits>
+    <vendorSystickConfig>0</vendorSystickConfig>
+  </cpu>
+
+  <!-- defaults for all peripherals -->
+  <addressUnitBits>8</addressUnitBits>
+  <width>32</width>
+  <size>32</size>
+  <access>read-write</access>
+  <resetValue>0x00000000</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask> <!-- default IO devices do not have a dedicated reset -->
+
+  <!-- Peripherals -->
+  <peripherals>
+    <!-- PWM0 -->
+    <peripheral>
+      <name>PWM0</name>
+      <description>Pulse-width modulation number 0</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt>
+        <name>PWM0</name>
+        <value>40</value>
+      </interrupt>
+
+      <registers>
+        <register>
+          <name>CLOCK_CTRL</name>
+          <description>Clock prescalar register</description>
+          <size>16</size>
+          <addressOffset>0x00</addressOffset>
+          <fields>
+            <field>
+              <name>CLK_SRC</name>
+              <bitRange>[0:0]</bitRange>
+              <description>PWM clock select bit</description>
+            </field>
+            <field>
+              <name>CLK_PRESCALAR</name>
+              <bitRange>[15:1]</bitRange>
+              <description>PWM prescalar value</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CTRL</name>
+          <description>PWM Control register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>CTRL_EN</name>
+              <bitRange>[0:0]</bitRange>
+              <description>PWM controller enable flag</description>
+            </field>
+            <field>
+              <name>CTRL_START</name>
+              <bitRange>[1:1]</bitRange>
+              <description>PWM signal generation start flag</description>
+            </field>
+            <field>
+              <name>CTRL_OUTPUT_EN</name>
+              <bitRange>[2:2]</bitRange>
+              <description>PWM output enable flag</description>
+            </field>
+            <field>
+              <name>CTRL_OUTPUT_POLARITY</name>
+              <bitRange>[3:3]</bitRange>
+              <description>PWM output polarity select flag</description>
+            </field>
+            <field>
+              <name>CTRL_COUNTER_RESET</name>
+              <bitRange>[4:4]</bitRange>
+              <description>Resets the counter in PWM</description>
+            </field>
+            <field>
+              <name>CTRL_COMP_OUT_ENABLE</name>
+              <bitRange>[5:5]</bitRange>
+              <description>PWM Complementary Output</description>
+	          </field>
+            <field>
+              <name>CTRL_HALFPERIOD_INTR_EN</name>
+              <bitRange>[6:6]</bitRange>
+              <description>PWM halfperiod interrupt enable</description>
+            </field>
+            <field>
+              <name>CTRL_FALL_INTR_EN</name>
+              <bitRange>[7:7]</bitRange>
+              <description>PWM fall interrupt enable</description>
+            </field>
+            <field>
+              <name>CTRL_RISE_INTR_EN</name>
+              <bitRange>[8:8]</bitRange>
+              <description>PWM rise interrupt enable</description>
+            </field>
+            <field>
+              <name>CTRL_HALFPERIOD_INTR</name>
+              <bitRange>[9:9]</bitRange>
+              <description>PWM halfperiod interrupt bit</description>
+            </field>
+            <field>
+              <name>CTRL_FALL_INTR</name>
+              <bitRange>[10:10]</bitRange>
+              <description>PWM fall interrupt bit</description>
+            </field>
+            <field>
+              <name>CTRL_RISE_INTR</name>
+              <bitRange>[11:11]</bitRange>
+              <description>PWM rise interrupt bit</description>
+            </field>
+            <field>
+              <name>CTRL_UPDATE_EN</name>
+              <bitRange>[12:12]</bitRange>
+              <description>When this bit is set, the new values of period and duty cycle will be applied</description>
+            </field>
+          </fields>
+	      </register>
+
+	      <register>
+          <name>PERIOD</name>
+          <description>PWM period register</description>
+	        <addressOffset>0x08</addressOffset>
+	      </register>
+
+	      <register>
+          <name>DUTY_CYCLE</name>
+          <description>PWM Duty_Cycle register</description>
+	        <addressOffset>0x0C</addressOffset>
+	      </register>
+
+	      <register>
+          <name>DEADBAND_DELAY</name>
+          <description>PWM Deadband delay register</description>
+	        <addressOffset>0x10</addressOffset>
+          <size>16</size>
+	      </register>
+      </registers>
+    </peripheral>
+
+    <!-- PWM1 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM1</name>
+      <description>Pulse Width Modulator</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030100</baseAddress>
+
+      <interrupt>
+        <name>PWM1</name>
+        <value>39</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- PWM2 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM2</name>
+      <description>Pulse Width Modulator</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030200</baseAddress>
+
+      <interrupt>
+        <name>PWM2</name>
+        <value>38</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- PWM3 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM3</name>
+      <description>Pulse Width Modulator</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030300</baseAddress>
+
+      <interrupt>
+        <name>PWM3</name>
+        <value>37</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- PWM4 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM4</name>
+      <description>Pulse Width Modulator</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030400</baseAddress>
+
+      <interrupt>
+        <name>PWM4</name>
+        <value>36</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- PWM5 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM5</name>
+      <description>Pulse Width Modulator</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030500</baseAddress>
+
+      <interrupt>
+        <name>PWM5</name>
+        <value>35</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- PWM6 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM6</name>
+      <description>Pulse Width Modulator</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030600</baseAddress>
+
+      <interrupt>
+        <name>PWM6</name>
+        <value>34</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- PWM7 -->
+    <peripheral derivedFrom="PWM0">
+      <name>PWM7</name>
+      <description>Pulse Width Modulator</description>
+      <groupName>PWM</groupName>
+      <baseAddress>0x00030700</baseAddress>
+
+      <interrupt>
+        <name>PWM7</name>
+        <value>33</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x12</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- GPTIMER -->
+    <peripheral>
+      <name>GPTIMER0</name>
+      <description>General purpose timer</description>
+      <groupName>GPTIMER</groupName>
+      <baseAddress>0x00044200</baseAddress>
+
+      <interrupt>
+        <name>GPTIMER0</name>
+        <value>41</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>CTRL</name>
+          <description>Control register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>CTRL_EN</name>
+              <bitRange>[0:0]</bitRange>
+              <description>Timer enable flag</description>
+            </field>
+            <field>
+              <name>CTRL_MODE</name>
+              <bitRange>[3:2]</bitRange>
+              <description>Timer mode select: 0=PWM, 1=Down, 2=Up, 3=UpDown</description>
+            </field>
+            <field>
+              <name>CTRL_OUTPUT_EN</name>
+              <bitRange>[4:4]</bitRange>
+              <description>Timer output enable bit</description>
+            </field>
+            <field>
+              <name>CTRL_COUNT_RESET</name>
+              <bitRange>[5:5]</bitRange>
+              <description>Timer counter reset bit</description>
+            </field>
+            <field>
+              <name>CTRL_CNT_COUNT_EN</name>
+              <bitRange>[6:6]</bitRange>
+              <description>Timer continuous count enable</description>
+            </field>
+            <field>
+              <name>CTRL_PWM_FALL_INTR_EN</name>
+              <bitRange>[7:7]</bitRange>
+              <description>PWM fall interupt enable</description>
+            </field>
+            <field>
+              <name>CTRL_PWM_RISE_INTR_EN</name>
+              <bitRange>[8:8]</bitRange>
+              <description>PWM rise interupt enable</description>
+            </field>
+            <field>
+              <name>CTRL_OFLOW_INTR_EN</name>
+              <bitRange>[9:9]</bitRange>
+              <description>Counter overflow interrupt enable</description>
+            </field>
+            <field>
+              <name>CTRL_UFLOW_INTR_EN</name>
+              <bitRange>[10:10]</bitRange>
+              <description>Counter underflow interrupt enable</description>
+            </field>
+            <field>
+              <name>CTRL_PWM_FALL_INTR</name>
+              <bitRange>[11:11]</bitRange>
+              <description>PWM fall interupt bit</description>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>CTRL_PWM_RISE_INTR</name>
+              <bitRange>[12:12]</bitRange>
+              <description>PWM rise interupt bit</description>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>CTRL_OFLOW_INTR</name>
+              <bitRange>[13:13]</bitRange>
+              <description>Counter overflow interrupt bit</description>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>CTRL_UFLOW_INTR</name>
+              <bitRange>[14:14]</bitRange>
+              <description>Counter underflow interrupt bit</description>
+              <access>read-only</access>
+            </field>
+            <field>
+              <name>CTRL_CAPTURE_INP_EN</name>
+              <bitRange>[15:15]</bitRange>
+              <description>Counter capture input enable</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLOCK_CTRL</name>
+          <description>Clock control register</description>
+          <addressOffset>0x04</addressOffset>
+          <fields>
+            <field>
+              <name>CLK_SRC</name>
+              <bitRange>[0:0]</bitRange>
+              <description>GPTIMER clock select bit</description>
+            </field>
+            <field>
+              <name>CLK_PRESCALAR</name>
+              <bitRange>[15:1]</bitRange>
+              <description>GPTIMER prescalar value</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COUNT</name>
+          <description>Counter register</description>
+          <addressOffset>0x08</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>RPTD_COUNT</name>
+          <description>Repeated count register</description>
+          <addressOffset>0x0C</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>DUTY_CYCLE</name>
+          <description>PWM duty cycle register</description>
+          <addressOffset>0x10</addressOffset>
+        </register>
+        <register>
+          <name>PERIOD</name>
+          <description>PWM period register</description>
+          <addressOffset>0x14</addressOffset>
+        </register>
+        <register>
+          <name>CAPTURE_INP</name>
+          <description>Timer capture input register</description>
+          <addressOffset>0x18</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- GPTIMER1 -->
+    <peripheral derivedFrom="GPTIMER0">
+      <name>GPTIMER1</name>
+      <description>General Purpose Timer</description>
+      <groupName>GPTIMER</groupName>
+      <baseAddress>0x00044220</baseAddress>
+
+      <interrupt>
+        <name>GPTIMER1</name>
+        <value>42</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- GPTIMER2 -->
+    <peripheral derivedFrom="GPTIMER0">
+      <name>GPTIMER2</name>
+      <description>General Purpose Timer</description>
+      <groupName>GPTIMER</groupName>
+      <baseAddress>0x00044240</baseAddress>
+
+      <interrupt>
+        <name>GPTIMER2</name>
+        <value>43</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- GPTIMER3 -->
+    <peripheral derivedFrom="GPTIMER0">
+      <name>GPTIMER3</name>
+      <description>General Purpose Timer</description>
+      <groupName>GPTIMER</groupName>
+      <baseAddress>0x00044260</baseAddress>
+
+      <interrupt>
+        <name>GPTIMER3</name>
+        <value>44</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- MTIME -->
+    <peripheral>
+      <name>CLINT0</name>
+      <description>Core Local Interrupt Controller</description>
+      <groupName>CLINT</groupName>
+      <baseAddress>0x02000000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0xbffff</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>MSIP</name>
+          <description>Machine Software interrupt pending register</description>
+          <addressOffset>0x00</addressOffset>
+        </register>
+        <register>
+          <name>TIMECMP</name>
+          <description>Time compare register</description>
+          <addressOffset>0x4000</addressOffset>
+          <size>64</size>
+        </register>
+        <register>
+          <name>TIME</name>
+          <description>System Time register - low</description>
+          <addressOffset>0xbff8</addressOffset>
+          <size>64</size>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- UART0 -->
+    <peripheral>
+      <name>UART0</name>
+      <description>Universal asynchronous receiver and transmitter</description>
+      <groupName>UART</groupName>
+      <baseAddress>0x00011300</baseAddress>
+
+      <interrupt>
+        <name>UART0</name>
+        <value>47</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>BAUD_REG</name>
+          <description>Baud register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>16</size>
+        </register>
+        <register>
+          <name>TX_REG</name>
+          <description>TX data register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>32</size>
+        </register>
+        <register>
+          <name>RX_REG</name>
+          <description>RX data register</description>
+          <addressOffset>0x08</addressOffset>
+          <size>32</size>
+        </register>
+        <register>
+          <name>STATUS_REG</name>
+          <description>UART Status register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>STATUS_TX_EMPTY</name>
+              <bitRange>[0:0]</bitRange>
+              <description>Transmittor register empty flag</description>
+            </field>
+            <field>
+              <name>STATUS_TX_FULL</name>
+              <bitRange>[1:1]</bitRange>
+              <description>Transmittor register full flag</description>
+            </field>
+            <field>
+              <name>STATUS_RX_NOT_EMPTY</name>
+              <bitRange>[2:2]</bitRange>
+              <description>Receiver register not empty flag</description>
+            </field>
+            <field>
+              <name>STATUS_RX_FULL</name>
+              <bitRange>[3:3]</bitRange>
+              <description>Receiver register full flag</description>
+            </field>
+            <field>
+              <name>STATUS_PARITY_ERR</name>
+              <bitRange>[4:4]</bitRange>
+              <description>Parity error in received data flag</description>
+            </field>
+            <field>
+              <name>STATUS_OVERRUN_ERR</name>
+              <bitRange>[5:5]</bitRange>
+              <description>Overrun error flag</description>
+            </field>
+            <field>
+              <name>STATUS_FRAME_ERR</name>
+              <bitRange>[6:6]</bitRange>
+              <description>Frame error flag</description>
+            </field>
+            <field>
+              <name>STATUS_BREAK_ERR</name>
+              <bitRange>[7:7]</bitRange>
+              <description>Break error flag</description>
+            </field>
+            <field>
+              <name>STATUS_RX_ALMOST_FULL</name>
+              <bitRange>[8:8]</bitRange>
+              <description>Indicates that the RXFIFO is almost full depending on RX_threshold register</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DELAY_REG</name>
+          <description>Stores the delay to have before Tranmission</description>
+          <addressOffset>0x10</addressOffset>
+          <size>16</size>
+        </register>
+        <register>
+          <name>CTRL</name>
+          <description>Control register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>CTRL_STOP_BITS</name>
+              <bitRange>[2:1]</bitRange>
+              <description>To select the number of stop bits. 
+                00 - 1 Stop bits,
+                01 - 1.5 Stop bits,
+                10 - 2 Stop bits
+              </description>
+            </field>
+            <field>
+              <name>CTRL_PARITY</name>
+              <bitRange>[4:3]</bitRange>
+              <description>To select the type of parity.
+                00 - None,
+                01 - Odd,
+                10 - Even
+              </description>
+            </field>
+            <field>
+              <name>CHAR_SIZE</name>
+              <bitRange>[6:5]</bitRange>
+              <description>Selects the transmission data size
+                00 - 8 bits,
+                01 - 7 bits,
+                10 - 6 bits,
+                11 - 5 bits
+              </description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTR_EN</name>
+          <description>Interrupts enable register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>INTR_TX_EMPTY_EN</name>
+              <bitRange>[0:0]</bitRange>
+              <description>Enable for interrupt of transmission fifo empty</description>
+            </field>
+            <field>
+              <name>INTR_TX_FULL_EN</name>
+              <bitRange>[1:1]</bitRange>
+              <description>Enable for interrupt of transmission fifo full</description>
+            </field>
+            <field>
+              <name>INTR_RX_NOT_EMPTY_EN</name>
+              <bitRange>[2:2]</bitRange>
+              <description>Enable for interrupt of receiver fifo not empty</description>
+            </field>
+            <field>
+              <name>INTR_RX_FULL_EN</name>
+              <bitRange>[3:3]</bitRange>
+              <description>Enable for interrupt of receiver fifo full</description>
+            </field>
+            <field>
+              <name>INTR_PARITY_EN</name>
+              <bitRange>[4:4]</bitRange>
+              <description>Enable for interrupt of parity error</description>
+            </field>
+            <field>
+              <name>INTR_OVERRUN_EN</name>
+              <bitRange>[5:5]</bitRange>
+              <description>Enable for interrupt of overrun error</description>
+            </field>
+            <field>
+              <name>INTR_FRAME_EN</name>
+              <bitRange>[6:6]</bitRange>
+              <description>Enable for interrupt of frame error</description>
+            </field>
+            <field>
+              <name>INTR_BREAK_EN</name>
+              <bitRange>[7:7]</bitRange>
+              <description>Enable for interrupt of break error</description>
+            </field>
+            <field>
+              <name>INTR_RX_ALMOST_FULL</name>
+              <bitRange>[8:8]</bitRange>
+              <description>Enable for interrupt RX fifo almost full depending on the RX_threshold register</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>RX_THRESHOLD</name>
+          <size>8</size>
+          <description>The threshold value to indicate the RX FIFO almost full interrupt</description>
+          <addressOffset>0x1C</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- UART1 -->
+    <peripheral derivedFrom="UART0">
+      <name>UART1</name>
+      <description>Universal asynchronous receiver and transmitter</description>
+      <groupName>UART</groupName>
+      <baseAddress>0x00011400</baseAddress>
+
+      <interrupt>
+        <name>UART1</name>
+        <value>48</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+    </peripheral>
+
+    <!-- UART2 -->
+    <peripheral derivedFrom="UART0">
+      <name>UART2</name>
+      <description>Universal asynchronous receiver and transmitter</description>
+      <groupName>UART</groupName>
+      <baseAddress>0x00011500</baseAddress>
+
+      <interrupt>
+        <name>UART2</name>
+        <value>49</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- I2C -->
+    <peripheral>
+      <name>I2C0</name>
+      <description>I2C communication peripheral</description>
+      <groupName>I2C</groupName>
+      <baseAddress>0x00044000</baseAddress>
+
+      <interrupt>
+        <name>I2C0</name>
+        <value>45</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x40</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>S2</name>
+          <description>Prescalar register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>8</size>
+        </register>
+        <register>
+          <name>CTRL</name>
+          <description>Control register</description>
+          <addressOffset>0x08</addressOffset>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>CTRL_ACK</name>
+              <bitRange>[0:0]</bitRange>
+              <description>Sends the acknoledge bit</description>
+            </field>
+            <field>
+              <name>CTRL_STO</name>
+              <bitRange>[1:1]</bitRange>
+              <description>Sends the stop bit</description>
+            </field>
+            <field>
+              <name>CTRL_STA</name>
+              <bitRange>[2:2]</bitRange>
+              <description>Sends the start bit</description>
+            </field>
+            <field>
+              <name>CTRL_ENI</name>
+              <bitRange>[3:3]</bitRange>
+              <description>Enables the external interrupt output</description>
+            </field>
+            <field>
+              <name>CTRL_ESO</name>
+              <bitRange>[6:6]</bitRange>
+              <description>Enable Serial Output. ESO = 0 - Registers can be initialized. ESO = 1 - I2C Serial Transmission</description>
+            </field>
+            <field>
+              <name>CTRL_PIN</name>
+              <bitRange>[7:7]</bitRange>
+              <description>Used as a software reset. If pin is 1 all status bits are reset.Used as transmission complete status in polled applications</description>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>S0</name>
+          <description>Data Transmission register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>8</size>
+        </register>
+        <register>
+          <name>STATUS</name>
+          <description>Status register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>STATUS_BB</name>
+              <description>Bus Busy bit - Indicates that the bus is busy(0 = busy). Also used in multi master systems only. 0 = busy</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>STATUS_LAB</name>
+              <description>Lost Arbitration bit - Used in Multiple Master systems only to denote that the master lost the arbitration</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>STATUS_AAS</name>
+              <description>Addressed as slave - Used in Slave Receiver mode</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>STATUS_AD0_LRB</name>
+              <description>LRB - holds the last received bit through I2C bus. AD0 - Generall Call bit used for broadcast. Valid only while PIN=0</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>STATUS_BER</name>
+              <description>Bus Error - Set to 1 when there is a misplaced START, STOP bit</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>STATUS_STS</name>
+              <description>Read the PIN bit of control register</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>S01</name>
+          <description>I2C Own Address Slave Register</description>
+          <addressOffset>0x20</addressOffset>
+          <size>32</size>
+        </register>
+        <register>
+          <name>S3</name>
+          <description>Interrupt vector register</description>
+          <addressOffset>0x28</addressOffset>
+          <size>32</size>
+        </register>
+        <register>
+          <name>TIME</name>
+          <description>I2C timeout calculation and interrupt register</description>
+          <addressOffset>0x30</addressOffset>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>TIMEOUT</name>
+              <description>The transmission timeout value</description>
+              <bitRange>[13:0]</bitRange>
+            </field>
+            <field>
+              <name>TIMEOUT_EN</name>
+              <description>Enable the transmission timeout calculation and interrupt generation</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>TIMEOUT_INTR</name>
+              <description>Interrupt output for transmission timeout</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SCL</name>
+          <description>Clock period register</description>
+          <addressOffset>0x38</addressOffset>
+          <size>32</size>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- I2C1 -->
+    <peripheral derivedFrom="I2C0">
+      <name>I2C1</name>
+      <description>I2C communication peripheral</description>
+      <groupName>I2C</groupName>
+      <baseAddress>0x00044100</baseAddress>
+
+      <interrupt>
+        <name>I2C1</name>
+        <value>46</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x40</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+
+    <!-- WatchDog Timer -->
+    <peripheral>
+      <name>WDT0</name>
+      <description>Watchdog Timer</description>
+      <groupName>WDT</groupName>
+      <baseAddress>0x00040400</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1C</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>WDT_CYCLES</name>
+          <description>The number of cycles to count down for reset generation</description>
+          <addressOffset>0x00</addressOffset>
+        </register>
+        <register>
+          <name>WDT_CTRL</name>
+          <description>Control register</description>
+          <addressOffset>0x08</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>WDT_CTRL_EN</name>
+              <description>Enable the watchdog timer</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>WDT_CTRL_MODE</name>
+              <description>Mode of watchdog timer. 0 - Interrupt, 1 - Reset </description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>WDT_CTRL_SOFT</name>
+              <description>Software reset </description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>WDT_RESET_CYCLES</name>
+          <description>The number of cycles for which the interrupt needs to be held</description>
+          <addressOffset>0x10</addressOffset>
+          <size>16</size>
+        </register>
+        <register>
+          <name>WDT_ACTIVE</name>
+          <description>Update the internal WD counter with the WD_CYCLES register</description>
+          <addressOffset>0x18</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- PINMUX -->
+    <peripheral>
+      <name>PINMUX0</name>
+      <description>Pinmux which selects between GPIO and PWM.</description>
+      <groupName>PINMUX</groupName>
+      <baseAddress>0x00040300</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x20</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>MUX0</name>
+          <description>Select between GPIO0 and PWM0. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x00</addressOffset>
+        </register>
+        <register>
+          <name>MUX1</name>
+          <description>Select between GPIO1 and PWM1. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x04</addressOffset>
+        </register>
+        <register>
+          <name>MUX2</name>
+          <description>Select between GPIO2 and PWM2. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x08</addressOffset>
+        </register>
+        <register>
+          <name>MUX3</name>
+          <description>Select between GPIO3 and PWM3. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x0c</addressOffset>
+        </register>
+        <register>
+          <name>MUX4</name>
+          <description>Select between GPIO4 and PWM4. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x10</addressOffset>
+        </register>
+        <register>
+          <name>MUX5</name>
+          <description>Select between GPIO5 and PWM5. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x14</addressOffset>
+        </register>
+        <register>
+          <name>MUX6</name>
+          <description>Select between GPIO6 and PWM6. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x18</addressOffset>
+        </register>
+        <register>
+          <name>MUX7</name>
+          <description>Select between GPIO7 and PWM7. 0 - GPIO, 1 - PWM</description>
+          <addressOffset>0x1c</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+
+    <peripheral>
+      <name>GPIO</name>
+      <description>General purpose IO. 32 GPIOs are available</description>
+      <groupName>GPIO-BLOCK</groupName>
+      <baseAddress>0x00040200</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x34</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>GPIO0</name><value>1</value></interrupt>
+      <interrupt><name>GPIO1</name><value>2</value></interrupt>
+      <interrupt><name>GPIO2</name><value>3</value></interrupt>
+      <interrupt><name>GPIO3</name><value>4</value></interrupt>
+      <interrupt><name>GPIO4</name><value>5</value></interrupt>
+      <interrupt><name>GPIO5</name><value>6</value></interrupt>
+      <interrupt><name>GPIO6</name><value>7</value></interrupt>
+      <interrupt><name>GPIO7</name><value>8</value></interrupt>
+      <interrupt><name>GPIO8</name><value>9</value></interrupt>
+      <interrupt><name>GPIO9</name><value>10</value></interrupt>
+      <interrupt><name>GPIO10</name><value>11</value></interrupt>
+      <interrupt><name>GPIO11</name><value>12</value></interrupt>
+      <interrupt><name>GPIO12</name><value>13</value></interrupt>
+      <interrupt><name>GPIO13</name><value>14</value></interrupt>
+      <interrupt><name>GPIO14</name><value>15</value></interrupt>
+      <interrupt><name>GPIO15</name><value>16</value></interrupt>
+      <interrupt><name>GPIO16</name><value>17</value></interrupt>
+      <interrupt><name>GPIO17</name><value>18</value></interrupt>
+      <interrupt><name>GPIO18</name><value>19</value></interrupt>
+      <interrupt><name>GPIO19</name><value>20</value></interrupt>
+      <interrupt><name>GPIO20</name><value>21</value></interrupt>
+      <interrupt><name>GPIO21</name><value>22</value></interrupt>
+      <interrupt><name>GPIO22</name><value>23</value></interrupt>
+      <interrupt><name>GPIO23</name><value>24</value></interrupt>
+      <interrupt><name>GPIO24</name><value>25</value></interrupt>
+      <interrupt><name>GPIO25</name><value>26</value></interrupt>
+      <interrupt><name>GPIO26</name><value>27</value></interrupt>
+      <interrupt><name>GPIO27</name><value>28</value></interrupt>
+      <interrupt><name>GPIO28</name><value>29</value></interrupt>
+      <interrupt><name>GPIO29</name><value>30</value></interrupt>
+      <interrupt><name>GPIO30</name><value>31</value></interrupt>
+      <interrupt><name>GPIO31</name><value>32</value></interrupt>
+
+      <registers>
+        <register>
+          <name>GPIO_DIRECTION</name>
+          <description>Select the direction of the GPIOs. Each bit position corresponds to the respective GPIO pin. 0 - Output, 1 - Input</description>
+          <addressOffset>0x00</addressOffset>
+        </register>
+        <register>
+          <name>GPIO_DATA</name>
+          <description>Contains the data to be sent out if the GPIO pin is configured as output and the data recieved when configured as input. Each bit position corresponds to the respective GPIO pin.</description>
+          <addressOffset>0x08</addressOffset>
+        </register>
+        <register>
+          <name>GPIO_SET</name>
+          <description>To set the respective GPIO pins</description>
+          <addressOffset>0x10</addressOffset>
+        </register>
+        <register>
+          <name>GPIO_CLEAR</name>
+          <description>To clear the respective GPIO pins</description>
+          <addressOffset>0x18</addressOffset>
+        </register>
+        <register>
+          <name>GPIO_TOGGLE</name>
+          <description>To invert the respective GPIO pins</description>
+          <addressOffset>0x20</addressOffset>
+        </register>
+        <register>
+          <name>GPIO_INTR</name>
+          <description>To enable the interrupt of respective GPIO pins</description>
+          <addressOffset>0x30</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+
+    <peripheral>
+      <name>AES</name>
+      <description>AES algorithm accelerator</description>
+      <groupName>CRYPTO</groupName>
+      <baseAddress>0x04000000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x78</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>AES_INPUT</name>
+          <description>Input text register. Input is given 64 bits at a time.</description>
+          <addressOffset>0x00</addressOffset>
+          <size>64</size>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>AES_KEY</name>
+          <description>Key data register. Key is given 64 bits at a time and needs to be written depending on the keylen select</description>
+          <addressOffset>0x20</addressOffset>
+          <size>64</size>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>AES_OUTPUT</name>
+          <description>Output register. Output is read 64 bits at a time.</description>
+          <size>64</size>
+          <addressOffset>0x40</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>AES_IV</name>
+          <description>Initialization vector register. IV is given 64 bits at a time.</description>
+          <size>64</size>
+          <addressOffset>0x50</addressOffset>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>AES_CTRL</name>
+          <description>Control register</description>
+          <addressOffset>0x60</addressOffset>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>AES_CTRL_ENCDEC</name>
+              <description>0 - Encrypt, 1 - Decrypt</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>AES_CTRL_KEYLEN</name>
+              <description>To select the lenght of key. 0 - 128 bits, 1 - 192 bits, 2 - 256 bits</description>
+              <bitRange>[2:1]</bitRange>
+            </field>
+            <field>
+              <name>AES_CTRL_MODE</name>
+              <description>0-ECB, 1-CBC, 2-CFB, 3-OFB, 4-CTR</description>
+              <bitRange>[5:3]</bitRange>
+            </field>
+            <field>
+              <name>AES_CTRL_END</name>
+              <description>To specify end of message</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AES_STATUS</name>
+          <description>To check the status.</description>
+          <addressOffset>0x61</addressOffset>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>AES_STATUS_OUTP_READ</name>
+              <description>Once the output is ready and read, this bit becomes 0.</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>AES_STATUS_OUTP_READY</name>
+              <description>Becomes 1 when the accelerator has computed the output. Becomes 0 once new input is given.</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AES_NEXT_BLK</name>
+          <description>The input data of the next block of the same message</description>
+          <size>64</size>
+          <addressOffset>0x70</addressOffset>
+          <access>write-only</access>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral>
+      <name>SHA256</name>
+      <description>SHA256 algorithm accelerator</description>
+      <groupName>CRYPTO</groupName>
+      <baseAddress>0x03000000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0xD0</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>SHA_INPUT</name>
+          <description>Input text register. Input is given 64 bits at a time.</description>
+          <size>64</size>
+          <addressOffset>0x00</addressOffset>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>SHA_OUTPUT</name>
+          <description>Output text register. Input is given 64 bits at a time.</description>
+          <size>64</size>
+          <addressOffset>0x80</addressOffset>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>SHA_CTRL</name>
+          <description>Control register</description>
+          <addressOffset>0xC0</addressOffset>
+          <size>8</size>
+          <fields>
+            <field>
+              <name>CONT_PREHASH</name>
+              <description>To continue the hash calculated from previous block to next block or not. 1 - continue from previous block. 0 - Initial prehash</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SHA_STATUS</name>
+          <description>To read the status register</description>
+          <addressOffset>0xC1</addressOffset>
+          <size>8</size>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>SHA_STATUS_READY</name>
+              <description>Sha is ready to take another input</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>SHA_STATUS_OUT_READY</name>
+              <description>The output of the SHA is ready</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral> 
+
+    <!-- RSA -->
+    <peripheral>
+      <name>RSA</name>
+      <description>RSA crypto accelerator</description>
+      <groupName>CRYPTO</groupName>
+      <baseAddress>0x05000000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0xC8</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>RSA_INPUT</name>
+          <description>RSA input register</description>
+          <size>64</size>
+          <addressOffset>0x00</addressOffset>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>RSA_EXP</name>
+          <description>RSA exponent register</description>
+          <size>64</size>
+          <addressOffset>0x20</addressOffset>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>RSA_MOD</name>
+          <description>RSA modulus register</description>
+          <size>64</size>
+          <addressOffset>0x40</addressOffset>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>RSA_RSqrMODN</name>
+          <description>RSA (R^2) % N register</description>
+          <size>64</size>
+          <addressOffset>0x60</addressOffset>
+          <access>write-only</access>
+        </register>
+        <register>
+          <name>RSA_OUTPUT</name>
+          <description>RSA output register</description>
+          <size>64</size>
+          <addressOffset>0x80</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>RSA_READY</name>
+          <description>RSA is ready to take another input and computation of previous is done</description>
+          <addressOffset>0xc0</addressOffset>
+          <access>read-only</access>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- SPI0 -->
+    <peripheral>
+      <name>SPI0</name>
+      <description>SPI communication peripheral</description>
+      <groupName>SPI</groupName>
+      <baseAddress>0x00020000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1C</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>SPI0</name><value>57</value></interrupt>
+
+      <registers>
+        <register>
+          <name>CTRL</name>
+          <description>SPI communication control register</description>
+          <addressOffset>0x00</addressOffset>
+          <fields>
+            <field>
+              <name>EN</name>
+              <description>holds the spi enable control. Once set, spi transaction will start and it will be reset at the end of spi transaction</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>LSBFIRST</name>
+              <description>holds whether the spi transaction is LSB first. If set LSB first else MSB first</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>COMM_MODE</name>
+              <description>holds the communication mode of the spi transaction. 00 - only transmit; 01 - only receive; 10 - transmit and immediate receive; 11 - transmit and receive</description>
+              <bitRange>[5:4]</bitRange>
+            </field>
+            <field>
+              <name>TOTAL_BIT_TX</name>
+              <description>holds the total number of bits to be received in a spi transaction</description>
+              <bitRange>[13:6]</bitRange>
+            </field>
+            <field>
+              <name>TOTAL_BIT_RX</name>
+              <description>holds the total number of bits to be transmitted in a spi transaction</description>
+              <bitRange>[21:14]</bitRange>
+            </field>
+            <field>
+              <name>SCLK_OUTEN</name>
+              <description>holds the SCLK pin's output enable. If set, the controller generates the sclk else sclk is expected from the spi device</description>
+              <bitRange>[22:22]</bitRange>
+            </field>
+            <field>
+              <name>NCS_OUTEN</name>
+              <description>holds the NCS pin's output enable. If set, the controller generates the ncs else ncs is expected from the spi device</description>
+              <bitRange>[23:23]</bitRange>
+            </field>
+            <field>
+              <name>MISO_OUTEN</name>
+              <description>holds the MISO pin's output enable. If set, output is transmitted through this pin else input is read from this pin</description>
+              <bitRange>[24:24]</bitRange>
+            </field>
+            <field>
+              <name>MOSI_OUTEN</name>
+              <description>holds the MOSI pin's output enable. If set, output is transmitted through this pin else input is read from this pin</description>
+              <bitRange>[25:25]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CLK_CTRL</name>
+          <description>SPI clock generation control register</description>
+          <addressOffset>0x04</addressOffset>
+          <fields>
+            <field>
+              <name>CLK_POLARITY</name>
+              <description>holds the clock polarity</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>CLK_PHASE</name>
+              <description>holds the clock phase</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>CLK_PRESCALAR</name>
+              <description>holds the prescaller value of the sclk</description>
+              <bitRange>[9:2]</bitRange>
+            </field>
+            <field>
+              <name>SETUP_DELAY</name>
+              <description>holds the setup delay</description>
+              <bitRange>[17:10]</bitRange>
+            </field>
+            <field>
+              <name>HOLD_DELAY</name>
+              <description>holds the hold delay</description>
+              <bitRange>[25:18]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TX</name>
+          <description>holds the tx data. This register is written by the AXI write request and once written the data is transferred to TX FIFO</description>
+          <addressOffset>0x08</addressOffset>
+        </register>
+        <register>
+          <name>RX</name>
+          <description>holds the tx data. This register is read by the AXI read request. The data is written from the RX FIFO</description>
+          <addressOffset>0x0c</addressOffset>
+        </register>
+        <register>
+          <name>INTR_EN</name>
+          <description>Spi interrupt enable register</description>
+          <addressOffset>0x10</addressOffset>
+          <fields>
+            <field>
+              <name>TX_FIFO_EMPTY_INTR_EN</name>
+              <description>TX FIFO empty interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is empty</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_DUAL_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is filled by 2 entries</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_QUAD_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is filled by 4 entries</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_OCTAL_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is filled by 8 entries</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_HALF_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is filled by 16 entries</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_24_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is filled by 24 entries</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_28_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is filled by 28 entries</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_30_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is filled by 30 entries</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_FULL_INTR_EN</name>
+              <description>TX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when TX FIFO is full - 32 entries</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_EMPTY_INTR_EN</name>
+              <description>RX FIFO empty interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is empty</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_DUAL_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is filled by 2 entries</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_QUAD_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is filled by 4 entries</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_OCTAL_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is filled by 8 entries</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_HALF_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is filled by 16 entries</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_24_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is filled by 24 entries</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_28_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is filled by 28 entries</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_30_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is filled by 30 entries</description>
+              <bitRange>[16:16]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_FULL_INTR_EN</name>
+              <description>RX FIFO full interrupt enable bit. This when set, interrupt is sent to PLIC when RX FIFO is full - 32 entries</description>
+              <bitRange>[17:17]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FIFO_STATUS</name>
+          <description>Gives the status of TX/RX FIFO</description>
+          <addressOffset>0x14</addressOffset>
+          <size>32</size>
+          <fields>
+            <field>
+              <name>TX_FIFO_EMPTY</name>
+              <description>TX FIFO empty. TX FIFO is empty</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_DUAL</name>
+              <description>TX FIFO full. TX FIFO is filled by 2 entries</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_QUAD</name>
+              <description>TX FIFO full. TX FIFO is filled by 4 entries</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_OCTAL</name>
+              <description>TX FIFO full. TX FIFO is filled by 8 entries</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_HALF</name>
+              <description>TX FIFO full. TX FIFO is filled by 16 entries</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_24</name>
+              <description>TX FIFO full. TX FIFO is filled by 24 entries</description>
+              <bitRange>[5:5]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_28</name>
+              <description>TX FIFO full. TX FIFO is filled by 28 entries</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_30</name>
+              <description>TX FIFO full. TX FIFO is filled by 30 entries</description>
+              <bitRange>[7:7]</bitRange>
+            </field>
+            <field>
+              <name>TX_FIFO_FULL</name>
+              <description>TX FIFO full. TX FIFO is full - 32 entries</description>
+              <bitRange>[8:8]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_EMPTY</name>
+              <description>RX FIFO empty. RX FIFO is empty</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_DUAL</name>
+              <description>RX FIFO full. RX FIFO is filled by 2 entries</description>
+              <bitRange>[10:10]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_QUAD</name>
+              <description>RX FIFO full. RX FIFO is filled by 4 entries</description>
+              <bitRange>[11:11]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_OCTAL</name>
+              <description>RX FIFO full. RX FIFO is filled by 8 entries</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_HALF</name>
+              <description>RX FIFO full. RX FIFO is filled by 16 entries</description>
+              <bitRange>[13:13]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_24</name>
+              <description>RX FIFO full. RX FIFO is filled by 24 entries</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_28</name>
+              <description>RX FIFO full. RX FIFO is filled by 28 entries</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_30</name>
+              <description>RX FIFO full. RX FIFO is filled by 30 entries</description>
+              <bitRange>[16:16]</bitRange>
+            </field>
+            <field>
+              <name>RX_FIFO_FULL</name>
+              <description>RX FIFO full. RX FIFO is full - 32 entries</description>
+              <bitRange>[17:17]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMM_STATUS</name>
+          <description>Status of SPI communication</description>
+          <addressOffset>0x18</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>BUSY</name>
+              <description>SPI Busy bit. This will be set when NCS goes low and will be reset when NCS goes high</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>TX_STARTED</name>
+              <description>Transmit enable bit. This bit will be set when the transmit operation starts and will be reset once the transmit operation is complete</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>RX_STARTED</name>
+              <description>Receive not enable bit. This bit will be reset when the receive operation starts and will be set once the receive operation is complete</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>TX_DEPTH</name>
+              <description>TX FIFO Threshold bits to know the number of entries in the TX FIFO</description>
+              <bitRange>[5:3]</bitRange>
+            </field>
+            <field>
+              <name>RX_DEPTH</name>
+              <description>RX FIFO Threshold bits to know the number of entries in the RX FIFO.</description>
+              <bitRange>[8:6]</bitRange>
+            </field>
+            <field>
+              <name>OVERRUN</name>
+              <description>Overrun bit. This will be set when there is an overrun during receive operation</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- SPI1 -->
+    <peripheral derivedFrom="SPI0">
+      <name>SPI1</name>
+      <description>SPI communication peripheral</description>
+      <groupName>SPI</groupName>
+      <baseAddress>0x00020100</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1C</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>SPI1</name><value>56</value></interrupt>
+    </peripheral>
+
+    <!-- SPI2 -->
+    <peripheral derivedFrom="SPI0">
+      <name>SPI2</name>
+      <description>SPI communication peripheral</description>
+      <groupName>SPI</groupName>
+      <baseAddress>0x00020200</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1C</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>SPI2</name><value>55</value></interrupt>
+    </peripheral>
+
+    <!-- SPI3 -->
+    <peripheral derivedFrom="SPI0">
+      <name>SPI3</name>
+      <description>SPI communication peripheral</description>
+      <groupName>SPI</groupName>
+      <baseAddress>0x00020300</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1C</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <interrupt><name>SPI3</name><value>54</value></interrupt>
+    </peripheral>
+
+    <!-- QSPI0 -->
+    <peripheral>
+      <name>QUADSPI0</name>
+      <description>QuadSPI Interface 0</description>
+      <groupName>QUADSPI</groupName>
+      <baseAddress>0x00040000</baseAddress>
+      <addressBlock>
+        <offset>0x0</offset>
+        <size>0x30</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>QUADSPI0</name>
+        <value>52</value>
+      </interrupt>
+      
+      <interrupt>
+        <name>QUADSPI0_READY</name>
+        <value>53</value>
+      </interrupt>
+
+      <registers>
+        <register>
+          <name>CR</name>
+          <displayName>CR</displayName>
+          <description>Control Register</description>
+          <addressOffset>0x0</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>PRESCALER</name>
+              <description>Clock prescaler</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+            <field>
+              <name>PMM</name>
+              <description>Polling match mode</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>APMS</name>
+              <description>Automatic poll mode stop</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TOIE</name>
+              <description>TimeOut interrupt enable</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMIE</name>
+              <description>Status match interrupt
+              enable</description>
+              <bitOffset>19</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FTIE</name>
+              <description>FIFO threshold interrupt
+              enable</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TCIE</name>
+              <description>Transfer complete interrupt
+              enable</description>
+              <bitOffset>17</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TEIE</name>
+              <description>Transfer error interrupt
+              enable</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FTHRES</name>
+              <description>IFO threshold level</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>TCEN</name>
+              <description>Timeout counter enable</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>ABORT</name>
+              <description>QSPI Communication Abort request</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>EN</name>
+              <description>QSPI Communication Enable</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DCR</name>
+          <displayName>DCR</displayName>
+          <description>Device Configuration Register</description>
+          <addressOffset>0x04</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FSIZE</name>
+              <description>FLASH memory size</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>CKMODE</name>
+              <description>Mode 0 / mode 3</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SR</name>
+          <displayName>SR</displayName>
+          <description>Status Register</description>
+          <addressOffset>0x8</addressOffset>
+          <size>0x20</size>
+          <access>read-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>FLEVEL</name>
+              <description>FIFO level</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>7</bitWidth>
+            </field>
+            <field>
+              <name>BUSY</name>
+              <description>Busy</description>
+              <bitOffset>5</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TOF</name>
+              <description>Timeout flag</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SMF</name>
+              <description>Status match flag</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FTF</name>
+              <description>FIFO threshold flag</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TCF</name>
+              <description>Transfer complete flag</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TEF</name>
+              <description>Transfer error flag</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FCR</name>
+          <displayName>FCR</displayName>
+          <description>Flag Clear Register</description>
+          <addressOffset>0x0C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CTOF</name>
+              <description>Clear timeout flag</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CSMF</name>
+              <description>Clear status match flag</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CTCF</name>
+              <description>Clear transfer complete
+              flag</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>CTEF</name>
+              <description>Clear transfer error flag</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DLR</name>
+          <displayName>DLR</displayName>
+          <description>data length register</description>
+          <addressOffset>0x10</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DL</name>
+              <description>Data length</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>CCR</name>
+          <displayName>CCR</displayName>
+          <description>communication configuration
+          register</description>
+          <addressOffset>0x14</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>MM_MODE</name>
+              <description>Memory Mapped Mode. Default value 0. For XIP Mode, set 0, for RAM Mode, set 1.</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>DUMMY_BIT</name>
+              <description>Set value 1 to send Dummy Cycles. Default 0</description>
+              <bitOffset>29</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SIOO</name>
+              <description>Send instruction only once
+              mode</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>FMODE</name>
+              <description>Functional mode</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DMODE</name>
+              <description>Data mode</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>DCYC</name>
+              <description>Number of dummy cycles</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>5</bitWidth>
+            </field>
+            <field>
+              <name>ABSIZE</name>
+              <description>Alternate bytes size</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>ABMODE</name>
+              <description>Alternate bytes mode</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>ADSIZE</name>
+              <description>Address size</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>ADMODE</name>
+              <description>Address mode</description>
+              <bitOffset>10</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>IMODE</name>
+              <description>Instruction mode</description>
+              <bitOffset>8</bitOffset>
+              <bitWidth>2</bitWidth>
+            </field>
+            <field>
+              <name>INSTRUCTION</name>
+              <description>Instruction</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>AR</name>
+          <displayName>AR</displayName>
+          <description>Address Register</description>
+          <addressOffset>0x18</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ADDRESS</name>
+              <description>Address</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ABR</name>
+          <displayName>ABR</displayName>
+          <description>Alternate Byte Register</description>
+          <addressOffset>0x1C</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>ALTERNATE</name>
+              <description>Alternate Byte</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>DR</name>
+          <displayName>DR</displayName>
+          <description>Data Register</description>
+          <addressOffset>0x20</addressOffset>
+          <size>0x20</size>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>DATA</name>
+              <description>Data</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- QSPI1 -->
+    <peripheral derivedFrom="QUADSPI0">
+      <name>QUADSPI1</name>
+      <description>QuadSPI Interface 1</description>
+      <groupName>QUADSPI</groupName>
+      <baseAddress>0x00040100</baseAddress>
+
+      <interrupt>
+        <name>QUADSPI1</name>
+        <value>50</value>
+      </interrupt>
+
+      <interrupt>
+        <name>QUADSPI1_READY</name>
+        <value>51</value>
+      </interrupt>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x30</size>
+        <usage>registers</usage>
+      </addressBlock>
+    </peripheral>
+ 
+
+    <!-- ITRACE -->
+    <peripheral>
+      <name>ITRACE</name>
+      <description>Instruction Trace</description>
+      <groupName>ITRACE-FEATURE</groupName>
+      <baseAddress>0x00060000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x24</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>CTRL</name>
+          <description>Itrace control register</description>
+          <addressOffset>0x00</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>ACTIVE</name>
+              <description>Indicates whether trace is active or not. Used for gating.</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>EN</name>
+              <description>Enables the trace</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>I_EN</name>
+              <description>Enables the Instruction trace</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>RESYNC_MODE</name>
+              <description>Sets the resync packet mode.
+                0-Not supported, 1-Trace packet count, 2-Every clock, 3-Instruction retired
+              </description>
+              <bitRange>[9:8]</bitRange>
+            </field>
+            <field>
+              <name>RESYNC_MAX</name>
+              <description>Sets the resync interval time.</description>
+              <bitRange>[15:12]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>FITER_CTRL</name>
+          <description>Instruction filter control</description>
+          <addressOffset>0x08</addressOffset>
+          <fields>
+            <field>
+              <name>EN</name>
+              <description>Filter enable</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>PRV_EN</name>
+              <description>Match privielge mode enable</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>PRV</name>
+              <description>The privelege mode to filter when enabled</description>
+              <bitRange>[3:2]</bitRange>
+            </field>
+            <field>
+              <name>COMP1_EN</name>
+              <description>Enable the first comparator</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+            <field>
+              <name>MATCH_COMP1</name>
+              <description>Mentions which comparator output to use for this 1st filter</description>
+              <bitRange>[8:7]</bitRange>
+            </field>
+            <field>
+              <name>COMP2_EN</name>
+              <description>Enable the second comparator</description>
+              <bitRange>[9:9]</bitRange>
+            </field>
+            <field>
+              <name>MATCH_COMP2</name>
+              <description>Mentions which comparator output to use for this 2nd filter</description>
+              <bitRange>[11:10]</bitRange>
+            </field>
+            <field>
+              <name>COMP3_EN</name>
+              <description>Enable the first comparator</description>
+              <bitRange>[12:12]</bitRange>
+            </field>
+            <field>
+              <name>MATCH_COMP3</name>
+              <description>Mentions which comparator output to use for this 3rd filter</description>
+              <bitRange>[14:13]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMP1_CTRL</name>
+          <description>Control register for 1st comparator</description>
+          <addressOffset>0x0c</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>PINPUT_MODE</name>
+              <description>Primary comparator input mode.
+                           0: iaddr, 1: context, 2: tval, 3: daddr.
+              </description>
+              <bitRange>[1:0]</bitRange>
+            </field>
+            <field>
+              <name>SINPUT_MODE</name>
+              <description>Secondary comparator input mode.
+                           0: iaddr, 1: context, 2: tval, 3: daddr.
+              </description>
+              <bitRange>[3:2]</bitRange>
+            </field>
+            <field>
+              <name>PINPUT_COMP_MODE</name>
+              <description>Mentions the comparison to be done for primary input. 0-equality, 1-not equal, 2-less than, 3-less than equal to, 4-greater than, 5-greater than equal to, 6-False, 7-True </description>
+              <bitRange>[6:4]</bitRange>
+            </field>
+            <field>
+              <name>SINPUT_COMP_MODE</name>
+              <description>Mentions the comparison to be done for secondary input. 0-equality, 1-not equal, 2-less than, 3-less than equal to, 4-greater than, 5-greater than equal to, 6-False, 7-True</description>
+              <bitRange>[10:8]</bitRange>
+            </field>
+            <field>
+              <name>PS_COMP_MODE</name>
+              <description>The comparison to be performed between primary and secondary input.</description>
+              <bitRange>[13:12]</bitRange>
+            </field>
+            <field>
+              <name>PNOTIFY</name>
+              <description>Sends a support packet when primary comparator matches</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>SNOTIFY</name>
+              <description>Sends a support packet when secondary comparator matches</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMP2_CTRL</name>
+          <description>Control register for 1st comparator</description>
+          <addressOffset>0x10</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>PINPUT_MODE</name>
+              <description>Primary comparator input mode.
+                           0: iaddr, 1: context, 2: tval, 3: daddr.
+              </description>
+              <bitRange>[1:0]</bitRange>
+            </field>
+            <field>
+              <name>SINPUT_MODE</name>
+              <description>Secondary comparator input mode.
+                           0: iaddr, 1: context, 2: tval, 3: daddr.
+              </description>
+              <bitRange>[3:2]</bitRange>
+            </field>
+            <field>
+              <name>PINPUT_COMP_MODE</name>
+              <description>Mentions the comparison to be done for primary input. 0-equality, 1-not equal, 2-less than, 3-less than equal to, 4-greater than, 5-greater than equal to, 6-False, 7-True </description>
+              <bitRange>[6:4]</bitRange>
+            </field>
+            <field>
+              <name>SINPUT_COMP_MODE</name>
+              <description>Mentions the comparison to be done for secondary input. 0-equality, 1-not equal, 2-less than, 3-less than equal to, 4-greater than, 5-greater than equal to, 6-False, 7-True</description>
+              <bitRange>[10:8]</bitRange>
+            </field>
+            <field>
+              <name>PS_COMP_MODE</name>
+              <description>The comparison to be performed between primary and secondary input.</description>
+              <bitRange>[13:12]</bitRange>
+            </field>
+            <field>
+              <name>PNOTIFY</name>
+              <description>Sends a support packet when primary comparator matches</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>SNOTIFY</name>
+              <description>Sends a support packet when secondary comparator matches</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMP3_CTRL</name>
+          <description>Control register for 1st comparator</description>
+          <addressOffset>0x14</addressOffset>
+          <size>16</size>
+          <fields>
+            <field>
+              <name>PINPUT_MODE</name>
+              <description>Primary comparator input mode.
+                           0: iaddr, 1: context, 2: tval, 3: daddr.
+              </description>
+              <bitRange>[1:0]</bitRange>
+            </field>
+            <field>
+              <name>SINPUT_MODE</name>
+              <description>Secondary comparator input mode.
+                           0: iaddr, 1: context, 2: tval, 3: daddr.
+              </description>
+              <bitRange>[3:2]</bitRange>
+            </field>
+            <field>
+              <name>PINPUT_COMP_MODE</name>
+              <description>Mentions the comparison to be done for primary input. 0-equality, 1-not equal, 2-less than, 3-less than equal to, 4-greater than, 5-greater than equal to, 6-False, 7-True </description>
+              <bitRange>[6:4]</bitRange>
+            </field>
+            <field>
+              <name>SINPUT_COMP_MODE</name>
+              <description>Mentions the comparison to be done for secondary input. 0-equality, 1-not equal, 2-less than, 3-less than equal to, 4-greater than, 5-greater than equal to, 6-False, 7-True</description>
+              <bitRange>[10:8]</bitRange>
+            </field>
+            <field>
+              <name>PS_COMP_MODE</name>
+              <description>The comparison to be performed between primary and secondary input.</description>
+              <bitRange>[13:12]</bitRange>
+            </field>
+            <field>
+              <name>PNOTIFY</name>
+              <description>Sends a support packet when primary comparator matches</description>
+              <bitRange>[14:14]</bitRange>
+            </field>
+            <field>
+              <name>SNOTIFY</name>
+              <description>Sends a support packet when secondary comparator matches</description>
+              <bitRange>[15:15]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>COMP1_PMATCH_LOW</name>
+          <description>Comparator 1 primary match data: Low 32 bits</description>
+          <addressOffset>0x18</addressOffset>
+        </register>
+        <register>
+          <name>COMP1_PMATCH_HIGH</name>
+          <description>Comparator 1 primary match data: High 32 bits</description>
+          <addressOffset>0x1C</addressOffset>
+        </register>
+        <register>
+          <name>COMP1_SMATCH_LOW</name>
+          <description>Comparator 1 secondary match data: Low 32 bits</description>
+          <addressOffset>0x20</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+
+    <!-- ITRACE_RAM -->
+    <peripheral>
+      <name>ITRACE_RAM</name>
+      <description>The RAM sink where all the trace packets are stored</description>
+      <groupName>ITRACE_FEATURE</groupName>
+      <baseAddress>0x00060100</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x100</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>CTRL</name>
+          <description>Control register</description>
+          <addressOffset>0x00</addressOffset>
+          <fields>
+            <field>
+              <name>ACTIVE</name>
+              <description>Indicates whether RAM is active or not.</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>EN</name>
+              <description>Enables the RAM to take trace packets.</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>STOP_ON_WRAP</name>
+              <description>Stop filling up packets into RAM when full</description>
+              <bitRange>[6:6]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>IMPL</name>
+          <description>Implementation details register</description>
+          <addressOffset>0x04</addressOffset>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>VER_MAJOR</name>
+              <description>Major version number</description>
+              <bitRange>[0:0]</bitRange>
+            </field>
+            <field>
+              <name>VER_MINOR</name>
+              <description>Minor version number</description>
+              <bitRange>[1:1]</bitRange>
+            </field>
+            <field>
+              <name>COMP_TYPE</name>
+              <description>Trace RAM sink component type</description>
+              <bitRange>[2:2]</bitRange>
+            </field>
+            <field>
+              <name>HAS_SRAM</name>
+              <description>Indicates whether SRAM is present</description>
+              <bitRange>[3:3]</bitRange>
+            </field>
+            <field>
+              <name>HAS_SMEM</name>
+              <description>Indicates whether SREM is present</description>
+              <bitRange>[4:4]</bitRange>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>START_LOW</name>
+          <description>The RAM start address register. Low 32 bits</description>
+          <addressOffset>0x10</addressOffset>
+        </register>
+        <register>
+          <name>START_HIGH</name>
+          <description>The RAM start address register. High 32 bits</description>
+          <addressOffset>0x14</addressOffset>
+        </register>
+        <register>
+          <name>LIMIT_LOW</name>
+          <description>The RAM end address register. Low 32 bits</description>
+          <addressOffset>0x18</addressOffset>
+        </register>
+        <register>
+          <name>LIMIT_HIGH</name>
+          <description>The RAM end address register. High 32 bits</description>
+          <addressOffset>0x1c</addressOffset>
+        </register>
+        <register>
+          <name>WP_LOW</name>
+          <description>Write pointer of trace packet into RAM. Low 32 bits</description>
+          <addressOffset>0x20</addressOffset>
+        </register>
+        <register>
+          <name>WP_HIGH</name>
+          <description>Write pointer of trace packet into RAM. High 32 bits</description>
+          <addressOffset>0x24</addressOffset>
+        </register>
+        <register>
+          <name>RP_LOW</name>
+          <description>Read pointer of trace packet into RAM. Low 32 bits</description>
+          <addressOffset>0x28</addressOffset>
+        </register>
+        <register>
+          <name>RP_HIGH</name>
+          <description>Read pointer of trace packet into RAM. High 32 bits</description>
+          <addressOffset>0x2c</addressOffset>
+        </register>
+        <register>
+          <name>DATA</name>
+          <access>read-only</access>
+          <description>RAM data is read by external host via this register.</description>
+          <addressOffset>0x40</addressOffset>
+        </register>
+      </registers>
+
+    </peripheral>
+
+    <!-- PLIC -->
+    <peripheral>
+      <name>PLIC0</name>
+      <description>Platform Level Interrupt Controller</description>
+      <groupName>PLIC</groupName>
+      <baseAddress>0x0C000000</baseAddress>
+
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x3FFFFFF</size>
+        <usage>registers</usage>
+      </addressBlock>
+
+      <registers>
+        <register>
+          <name>PRIORITY0</name>
+          <description>Priority register for interrupt source 0</description>
+          <addressOffset>0x00000</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY1</name>
+          <description>Priority register for interrupt source 1</description>
+          <addressOffset>0x00004</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY2</name>
+          <description>Priority register for interrupt source 2</description>
+          <addressOffset>0x00008</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY3</name>
+          <description>Priority register for interrupt source 3</description>
+          <addressOffset>0x0000c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY4</name>
+          <description>Priority register for interrupt source 4</description>
+          <addressOffset>0x00010</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY5</name>
+          <description>Priority register for interrupt source 5</description>
+          <addressOffset>0x00014</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY6</name>
+          <description>Priority register for interrupt source 6</description>
+          <addressOffset>0x00018</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY7</name>
+          <description>Priority register for interrupt source 7</description>
+          <addressOffset>0x0001c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY8</name>
+          <description>Priority register for interrupt source 8</description>
+          <addressOffset>0x00020</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY9</name>
+          <description>Priority register for interrupt source 9</description>
+          <addressOffset>0x00024</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY10</name>
+          <description>Priority register for interrupt source 10</description>
+          <addressOffset>0x00028</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY11</name>
+          <description>Priority register for interrupt source 11</description>
+          <addressOffset>0x0002c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY12</name>
+          <description>Priority register for interrupt source 12</description>
+          <addressOffset>0x00030</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY13</name>
+          <description>Priority register for interrupt source 13</description>
+          <addressOffset>0x00034</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY14</name>
+          <description>Priority register for interrupt source 14</description>
+          <addressOffset>0x00038</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY15</name>
+          <description>Priority register for interrupt source 15</description>
+          <addressOffset>0x0003c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY16</name>
+          <description>Priority register for interrupt source 16</description>
+          <addressOffset>0x00040</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY17</name>
+          <description>Priority register for interrupt source 17</description>
+          <addressOffset>0x00044</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY18</name>
+          <description>Priority register for interrupt source 18</description>
+          <addressOffset>0x00048</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY19</name>
+          <description>Priority register for interrupt source 19</description>
+          <addressOffset>0x0004c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY20</name>
+          <description>Priority register for interrupt source 20</description>
+          <addressOffset>0x00050</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY21</name>
+          <description>Priority register for interrupt source 21</description>
+          <addressOffset>0x00054</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY22</name>
+          <description>Priority register for interrupt source 22</description>
+          <addressOffset>0x00058</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY23</name>
+          <description>Priority register for interrupt source 23</description>
+          <addressOffset>0x0005c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY24</name>
+          <description>Priority register for interrupt source 24</description>
+          <addressOffset>0x00060</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY25</name>
+          <description>Priority register for interrupt source 25</description>
+          <addressOffset>0x00064</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY26</name>
+          <description>Priority register for interrupt source 26</description>
+          <addressOffset>0x00068</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY27</name>
+          <description>Priority register for interrupt source 27</description>
+          <addressOffset>0x0006c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY28</name>
+          <description>Priority register for interrupt source 28</description>
+          <addressOffset>0x00070</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY29</name>
+          <description>Priority register for interrupt source 29</description>
+          <addressOffset>0x00074</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY30</name>
+          <description>Priority register for interrupt source 30</description>
+          <addressOffset>0x00078</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY31</name>
+          <description>Priority register for interrupt source 31</description>
+          <addressOffset>0x0007c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY32</name>
+          <description>Priority register for interrupt source 32</description>
+          <addressOffset>0x00080</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY33</name>
+          <description>Priority register for interrupt source 33</description>
+          <addressOffset>0x00084</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY34</name>
+          <description>Priority register for interrupt source 34</description>
+          <addressOffset>0x00088</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY35</name>
+          <description>Priority register for interrupt source 35</description>
+          <addressOffset>0x0008c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY36</name>
+          <description>Priority register for interrupt source 36</description>
+          <addressOffset>0x00090</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY37</name>
+          <description>Priority register for interrupt source 37</description>
+          <addressOffset>0x00094</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY38</name>
+          <description>Priority register for interrupt source 38</description>
+          <addressOffset>0x00098</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY39</name>
+          <description>Priority register for interrupt source 39</description>
+          <addressOffset>0x0009c</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY40</name>
+          <description>Priority register for interrupt source 40</description>
+          <addressOffset>0x000a0</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY41</name>
+          <description>Priority register for interrupt source 41</description>
+          <addressOffset>0x000a4</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY42</name>
+          <description>Priority register for interrupt source 42</description>
+          <addressOffset>0x000a8</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY43</name>
+          <description>Priority register for interrupt source 43</description>
+          <addressOffset>0x000ac</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY44</name>
+          <description>Priority register for interrupt source 44</description>
+          <addressOffset>0x000b0</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY45</name>
+          <description>Priority register for interrupt source 45</description>
+          <addressOffset>0x000b4</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY46</name>
+          <description>Priority register for interrupt source 46</description>
+          <addressOffset>0x000b8</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY47</name>
+          <description>Priority register for interrupt source 47</description>
+          <addressOffset>0x000bc</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY48</name>
+          <description>Priority register for interrupt source 48</description>
+          <addressOffset>0x000c0</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY49</name>
+          <description>Priority register for interrupt source 49</description>
+          <addressOffset>0x000c4</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY50</name>
+          <description>Priority register for interrupt source 50</description>
+          <addressOffset>0x000c8</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY51</name>
+          <description>Priority register for interrupt source 51</description>
+          <addressOffset>0x000cc</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY52</name>
+          <description>Priority register for interrupt source 52</description>
+          <addressOffset>0x000d0</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY53</name>
+          <description>Priority register for interrupt source 53</description>
+          <addressOffset>0x000d4</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY54</name>
+          <description>Priority register for interrupt source 54</description>
+          <addressOffset>0x000d8</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY55</name>
+          <description>Priority register for interrupt source 55</description>
+          <addressOffset>0x000dc</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY56</name>
+          <description>Priority register for interrupt source 56</description>
+          <addressOffset>0x000e0</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY57</name>
+          <description>Priority register for interrupt source 57</description>
+          <addressOffset>0x000e4</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY58</name>
+          <description>Priority register for interrupt source 58</description>
+          <addressOffset>0x000e8</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY59</name>
+          <description>Priority register for interrupt source 59</description>
+          <addressOffset>0x000ec</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY60</name>
+          <description>Priority register for interrupt source 60</description>
+          <addressOffset>0x000f0</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY61</name>
+          <description>Priority register for interrupt source 61</description>
+          <addressOffset>0x000f4</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY62</name>
+          <description>Priority register for interrupt source 62</description>
+          <addressOffset>0x000f8</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY63</name>
+          <description>Priority register for interrupt source 63</description>
+          <addressOffset>0x000fc</addressOffset>
+        </register>
+        <register>
+          <name>PENDING_0_32</name>
+          <description>Interrupt pending bits of sources 0-32</description>
+          <addressOffset>0x01000</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>PENDING_33_63</name>
+          <description>Interrupt pending bits of sources 33-63</description>
+          <addressOffset>0x01004</addressOffset>
+          <access>read-only</access>
+        </register>
+        <register>
+          <name>INTR_EN_0_32</name>
+          <description>Interrupt enable bits of sources 0-32</description>
+          <addressOffset>0x02000</addressOffset>
+        </register>
+        <register>
+          <name>INTR_EN_33_63</name>
+          <description>Interrupt enable bits of sources 33-63</description>
+          <addressOffset>0x02004</addressOffset>
+        </register>
+        <register>
+          <name>PRIORITY_THRES</name>
+          <description>Priority threshold register</description>
+          <addressOffset>0x10000</addressOffset>
+        </register>
+        <register>
+          <name>INTR_COMPLETE</name>
+          <description>Interrupt claim/complete register</description>
+          <addressOffset>0x10004</addressOffset>
+        </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>
