@@ -1,15 +1,20 @@
 use std::env;
 use std::fs;
+use std::fs::File;
+use std::io::Write;
 use std::path::PathBuf;
 
 fn main() {
-    let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
+    // let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
 
     // Put the linker script somewhere the linker can find it.
-    fs::write(out_dir.join("memory.x"), include_bytes!("memory.x")).unwrap();
-    fs::write(out_dir.join("vajra.x"), include_bytes!("vajra.x")).unwrap();
-    println!("cargo:rustc-link-search={}", out_dir.display());
+    let out = &PathBuf::from(env::var_os("OUT_DIR").unwrap());
+    File::create(out.join("memory.x"))
+        .unwrap()
+        .write_all(include_bytes!("memory.x"))
+        .unwrap();
+    
+    println!("cargo:rustc-link-search={}", out.display());
     println!("cargo:rerun-if-changed=memory.x");
-
     println!("cargo:rerun-if-changed=build.rs");
 }

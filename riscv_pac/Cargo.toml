@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 critical-section = { version = "1.0", optional = true }
 riscv = "0.11.1"
-riscv-rt = { version = "0.13.0", optional = true }
+riscv-rt = { version = "0.11.0", optional = true }
 vcell = "0.1.0"
 
 [features]

@@ -1213,7 +1213,6 @@ impl core::fmt::Debug for Pinmux0 {
 #[doc = "Pinmux which selects between GPIO and PWM."]
 pub mod pinmux0;
 #[doc = "General purpose IO. 32 GPIOs are available"]
-#[derive(Clone)]
 pub struct Gpio {
     _marker: PhantomData<*const ()>,
 }

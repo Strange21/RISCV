@@ -3,22 +3,6 @@
 
 ![image](https://media.github.boschdevcloud.com/user/30349/files/931a1472-c40e-4bf5-8987-2206701105b0)
 
-- **Steps to install and program**
-	- installing gdb-multiarch
-	- sudo apt install openocd
-	- sudo apt install gdb-multiarch
-	- gdb-multiarch
-- terminal 1
-	- openocd -f secure-iot-jlink-jtag.cfg
-- terminal 2
-	- gdb-multiarch
-	- set architecture riscv:rv64
-	- target remote:3333
-	- file file_path
-	- load
-	- c
-
-
 
 
 

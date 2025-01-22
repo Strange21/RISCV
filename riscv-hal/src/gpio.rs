@@ -66,7 +66,6 @@ pub trait GpioPinOps {
     fn is_low(&self) -> bool;
 }
 
-#[derive(Clone)]
 pub struct GpioPin<GPIO: GpioOps> {
     index: u8,
     gpio: GPIO,
