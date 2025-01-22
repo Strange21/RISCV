@@ -1,28 +1,4 @@
-/**
- * Project                           : Secure IoT SoC
- * Name of the file                  : flash-linker.ld
- * Brief Description of file         : This is a linker script to compile code for flash based application
- * Name of Author                    : Vishwajith.N.S 
- * Email ID                          : vishwajith@mindgrovetech.in
- * 
- * 
- * 
- * @file flash-linker.ld
- * @author Vishwajith .N.S (vishwajith@mindgrovetech.in)
- * @brief This is a linker script to compile code for flash based application
- * @version 0.2
- * @date 2024-09-27
- * 
- * @copyright Copyright (c) Mindgrove Technologies Pvt. Ltd 2024. All rights reserved.
- * 
- */
 
-/*************************************************************************************************
-1.Text an readonly sections are placed in FLASH.
-2.sdata ,data ,bss ,sbss are placed in RAM(vma) which are copied from FLASH(lma) in startup code.
-3.Stack is started from end of RAM uptil 1KB.
-4.After Stack end,Heap occupies memory region between end of tbss section and stack section. 
-***************************************************************************************************/
 OUTPUT_ARCH( "riscv" )
 ENTRY(_start)
 
